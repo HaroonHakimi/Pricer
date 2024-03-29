@@ -15,12 +15,12 @@ const HeroCarousel = () => {
     ]
 
   return (
-    <div>
+    <div className="hero-carousel">
       <Carousel
       showThumbs={false}
-      autoPlay
+      // autoPlay
       infiniteLoop
-      interval={2000}
+      // interval={2000}
       showArrows={false}
       showStatus={false}
       >
@@ -37,6 +37,14 @@ const HeroCarousel = () => {
             ))
         }
       </Carousel>
+
+      <Image
+      src='/assets/icons/hand-drawn-arrow.svg'
+      alt="arrow"
+      width={175}
+      height={175}
+      className="max-xl:hidden absolute left-[-15%] bottom-0"
+      />
     </div>
   );
 };

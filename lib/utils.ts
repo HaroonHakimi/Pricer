@@ -129,3 +129,15 @@ export function returnUnique(element: any) {
     // Return null if no match is found or if the element is not a string
     return null;
 }
+
+export function returnNum(element: any) {
+  let num = ''
+
+  for (let char of element) {
+    if (/^\d+$/.test(char)) {
+      num += char
+    }
+  }
+
+  return num
+}

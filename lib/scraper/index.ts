@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { extractCurrency, extractDescription, extractPrice, returnUnique } from "../utils";
+import { extractCurrency, extractDescription, extractPrice, returnNum, returnUnique } from "../utils";
 
 export async function scrapeAmazonProduct(url: string) {
   if (!url) return;
@@ -56,8 +56,10 @@ export async function scrapeAmazonProduct(url: string) {
 
     const currency = extractCurrency($(".a-price-symbol"));
     const discountRate = returnUnique($('#savingsPercentage').text().replace(/[-%]/g, ""))
+    const reviews = returnNum($('[data-hook="total-review-count"]').text().trim())
+    const description = $('#feature-bullets').text().trim()
+    const ratings = $('#acrCustomerReviewText').text().trim()
 
-    const description = extractDescription($)
     //Construct data object with scraped information
     const data = {
         url, 
@@ -69,7 +71,7 @@ export async function scrapeAmazonProduct(url: string) {
         priceHistory: [],
         discountRate: Number(discountRate),
         category: 'category',
-        reviewsCount: '100',
+        reviewsCount: reviews,
         stars: 4.5,
         isOutOfStock: outOfStock,
         description: description,

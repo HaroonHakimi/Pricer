@@ -72,7 +72,7 @@ export async function scrapeAmazonProduct(url: string) {
         discountRate: Number(discountRate),
         category: 'category',
         reviewsCount: reviews,
-        stars: 4.5,
+        stars: ratings,
         isOutOfStock: outOfStock,
         description: description,
         lowestPrice: Number(currentPrice) || Number(originalPrice),

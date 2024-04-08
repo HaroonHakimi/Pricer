@@ -139,5 +139,5 @@ export function returnNum(element: any) {
     }
   }
 
-  return num
+  return parseInt(num, 10)
 }

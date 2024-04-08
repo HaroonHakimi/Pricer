@@ -58,7 +58,8 @@ export async function scrapeAmazonProduct(url: string) {
     const discountRate = returnUnique($('#savingsPercentage').text().replace(/[-%]/g, ""))
     const reviews = returnNum($('[data-hook="total-review-count"]').text().trim())
     const description = $('#feature-bullets').text().trim()
-    const ratings = $('#acrCustomerReviewText').text().trim()
+    const ratings = parseFloat($('#acrCustomerReviewText').text().trim())
+
 
     //Construct data object with scraped information
     const data = {
@@ -77,7 +78,7 @@ export async function scrapeAmazonProduct(url: string) {
         description: description,
         lowestPrice: Number(currentPrice) || Number(originalPrice),
         highestPrice: Number(originalPrice) || Number(currentPrice),
-        average: Number(currentPrice) || Number(originalPrice),
+        averagePrice: Number(currentPrice) || Number(originalPrice),
     }
 
     return data

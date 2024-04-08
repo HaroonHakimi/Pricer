@@ -6,7 +6,7 @@ import { connectToDB } from "../mongoose";
 import { scrapeAmazonProduct } from "../scraper"
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
-import { generateEmailBody } from "../nodemailer";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 
 
 export async function scrapeAndStoreProduct(productUrl: string) {
@@ -94,7 +94,7 @@ export async function getSimilarProducts(productId: string) {
     }
 }
 
-export async function addUserEmailTOProduct(productId: string, userEmail: string) {
+export async function addUserEmailToProduct(productId: string, userEmail: string) {
     try {
         //Send our first email...
 
@@ -109,7 +109,7 @@ export async function addUserEmailTOProduct(productId: string, userEmail: string
 
             await product.save()
 
-            const emailContent = generateEmailBody(product, 'WELCOME')
+            const emailContent = await generateEmailBody(product, 'WELCOME') // This returns a promise
 
             await sendEmail(emailContent, [userEmail])
         }

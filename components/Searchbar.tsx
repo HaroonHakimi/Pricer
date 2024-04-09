@@ -6,6 +6,7 @@ const Searchbar = () => {
   const [searchPrompt, setSearchPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false)
 
+
   const isValidAmazonProductURL = (url: string) => {
     try {
       const parsedURL = new URL(url);
@@ -24,8 +25,9 @@ const Searchbar = () => {
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    
     event.preventDefault();
-
+    
     const isValidLink = isValidAmazonProductURL(searchPrompt);
 
     if (!isValidLink) return alert('Please provide a valid amazon link')
@@ -35,10 +37,12 @@ const Searchbar = () => {
 
       //Scrape the product page
       const product = await scrapeAndStoreProduct(searchPrompt)
+
     } catch (error) {
       console.log(error)
     } finally {
       setIsLoading(false)
+      setSearchPrompt('')
     }
   };
 

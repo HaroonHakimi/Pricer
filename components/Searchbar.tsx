@@ -52,7 +52,7 @@ const Searchbar = () => {
         type="text"
         value={searchPrompt}
         onChange={(e) => setSearchPrompt(e.target.value)}
-        placeholder="Enter Product link"
+        placeholder="Enter Amazon Product link"
         className="searchbar-input"
       />
       <button 
